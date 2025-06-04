@@ -1,4 +1,3 @@
 # so-close.groupe13
 
-axel.gautier
-omri-zakaria.dakka
+Logins : axel.gautier / omri-zakaria.dakka
