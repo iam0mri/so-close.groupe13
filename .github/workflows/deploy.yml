@@ -15,4 +15,4 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           source: "index.html"
-          target: /home/sigl
+          target: /home/sigl/site
