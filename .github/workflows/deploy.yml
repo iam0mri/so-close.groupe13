@@ -1,26 +1,15 @@
 name: Déploiement So-Close
-
-on:
-  push:
-    branches:
-      - main
-
+on: [push]
 jobs:
   deploy:
     runs-on: sigl-latest
-
     steps:
-      - name: Récupération du code
-        uses: actions/checkout@v4
-
-      - name: Afficher l’heure du build
-        run: date
-        
+      - uses: actions/checkout@v4
       - name: Copier fichier via SCP
-        uses: appleboy/scp-action@v0.1.4
+        uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: index.html
-          target: /home/sigl
+          source: "index.html,image.jpg"
+          target: ../../data/www
