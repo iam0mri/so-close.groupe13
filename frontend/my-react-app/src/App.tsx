@@ -27,7 +27,7 @@ const App: React.FC = () => {
   return (
     <div className="app-container">
       <header>
-        <img src="image2.png" alt="Logo So Close" className="logo" />
+        <img src="image2.jpg" alt="Logo So Close" className="logo" />
         <h1>So Close</h1>
         <h2>Omri Dakka Axel Gautier</h2>
       </header>
