@@ -9,4 +9,4 @@ nous avons mis en place une action, qui lorsque nous coderons sur notre repo git
 la fonctionnalité choisie est: Affichage des jardins potagers disponibles dans un quartier
 les technologies utilisées sont:
 languages : typescript, CSS, HTML
-framework: react
+framework: react 
