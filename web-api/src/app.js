@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const gardensRouter = require('controllers/gardens');
+const gardensRouter = require('routes/gardens');
 
 const app = express();
 const PORT = 4000;
@@ -8,7 +8,6 @@ const PORT = 4000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
 app.use('/api/gardens', gardensRouter);
 
 app.listen(PORT, () => {
