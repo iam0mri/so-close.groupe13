@@ -6,7 +6,7 @@ type Garden = {
   name: string;
   district: string;
 };
-
+var district = 'Tous';
 const App: React.FC = () => {
   const [gardens, setGardens] = useState<Garden[]>([]);
   const [districts, setDistricts] = useState<string[]>([]);
@@ -35,11 +35,12 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchGardens('Tous');
+    fetchGardens(district);
   }, []);
 
   const handleDistrictChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = event.target.value;
+    district = selected;
     setSelectedDistrict(selected);
     fetchGardens(selected);
   };
