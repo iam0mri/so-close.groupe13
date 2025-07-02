@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const gardensRouter = require('routes/gardens');
+const gardensRouter = require('../routes/gardens');
 
 const app = express();
 const PORT = 4000;
