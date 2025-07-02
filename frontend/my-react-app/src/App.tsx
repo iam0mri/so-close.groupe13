@@ -35,12 +35,14 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log(district);
     fetchGardens(district);
   }, []);
 
   const handleDistrictChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = event.target.value;
     district = selected;
+    console.log(district);
     setSelectedDistrict(selected);
     fetchGardens(selected);
   };
