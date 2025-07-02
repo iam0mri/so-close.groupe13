@@ -5,7 +5,7 @@ import gardenRoutes from './routes/gardenRoutes';
 
 const app = express();
 const PORT = 5173;
-
+    
 app.use(cors());
 app.use(bodyParser.json());
 

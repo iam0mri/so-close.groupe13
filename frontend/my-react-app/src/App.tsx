@@ -9,46 +9,80 @@ type Garden = {
   district: string;
 };
 
-const mockGardens: Garden[] = [
-  { id: 1, name: 'Le Jardin de Belleville', address: 'Rue Piat, 75020 Paris', availablePlots: 3 , district: '20e'},
-  { id: 2, name: 'Les Petits Potagers', address: 'Rue de Reuilly, 75012 Paris', availablePlots: 5, district: '12e'},
-  { id: 3, name: 'La Terre Promise', address: 'Boulevard de Ménilmontant, 75011 Paris', availablePlots: 0, district: '11e' },
-  { id: 4, name: 'Les Racines Solidaires', address: 'Rue de Bagnolet, 75020 Paris', availablePlots: 2, district: '20e' },
-];
-
 const App: React.FC = () => {
   const [gardens, setGardens] = useState<Garden[]>([]);
+  const [districts, setDistricts] = useState<string[]>([]);
+  const [selectedDistrict, setSelectedDistrict] = useState<string>('Tous');
+
+  const fetchGardens = async (district: string) => {
+    try {
+      const url =
+        district && district !== 'Tous'
+          ? `http://localhost:4000/api/gardens?district=${district}`
+          : 'http://localhost:4000/api/gardens';
+      const response = await fetch(url);
+      const data = await response.json();
+      setGardens(data);
+
+      // Créer une liste unique de quartiers
+      if (district === 'Tous') {
+        const uniqueDistricts = Array.from(
+          new Set(data.map((g: Garden) => g.district))
+        );
+        setDistricts(uniqueDistricts.sort());
+      }
+    } catch (error) {
+      console.error('Erreur de chargement :', error);
+    }
+  };
 
   useEffect(() => {
-    // Simule une requête API
-    setTimeout(() => {
-      setGardens(mockGardens);
-    }, 500);
+    fetchGardens('Tous');
   }, []);
+
+  const handleDistrictChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selected = event.target.value;
+    setSelectedDistrict(selected);
+    fetchGardens(selected);
+  };
 
   return (
     <div className="app-container">
       <header>
-        <img src="image2.jpg" alt="Logo So Close" className="logo" />
+        <img src="image2.png" alt="Logo So Close" className="logo" />
         <h1>So Close</h1>
-        <h2>Omri Dakka Axel Gautier</h2>
+        <h2>par Alice Dupont & Marc Lemaitre</h2>
       </header>
 
       <section className="intro">
-        <p>Lorem Ipsum</p>
+        <p>Bienvenue sur So Close, votre plateforme pour découvrir et rejoindre les jardins partagés de votre quartier à Paris.</p>
+      </section>
+
+      <section className="filter">
+        <label htmlFor="district-select">Filtrer par quartier :</label>
+        <select id="district-select" value={selectedDistrict} onChange={handleDistrictChange}>
+          <option value="Tous">Tous</option>
+          {districts.map((district) => (
+            <option key={district} value={district}>
+              {district}
+            </option>
+          ))}
+        </select>
       </section>
 
       <section className="garden-list">
-        <h3>Jardins disponibles</h3>
-        <div className="gardens">
-          {gardens.map((garden) => (
+        {gardens.length === 0 ? (
+          <p>Aucun jardin trouvé dans ce quartier.</p>
+        ) : (
+          gardens.map((garden) => (
             <div key={garden.id} className="garden-card">
-              <h4>{garden.name}</h4>
+              <h3>{garden.name}</h3>
               <p><strong>Adresse :</strong> {garden.address}</p>
+              <p><strong>Quartier :</strong> {garden.district}</p>
               <p><strong>Parcelles disponibles :</strong> {garden.availablePlots}</p>
             </div>
-          ))}
-        </div>
+          ))
+        )}
       </section>
     </div>
   );
