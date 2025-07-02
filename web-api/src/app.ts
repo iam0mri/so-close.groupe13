@@ -4,8 +4,8 @@ import bodyParser from 'body-parser';
 import gardenRoutes from './routes/gardenRoutes';
 
 const app = express();
-const PORT = 5173;
-    
+const PORT = 4000;
+
 app.use(cors());
 app.use(bodyParser.json());
 
