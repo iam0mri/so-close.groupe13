@@ -51,12 +51,8 @@ const App: React.FC = () => {
       <header>
         <img src="image2.png" alt="Logo So Close" className="logo" />
         <h1>So Close</h1>
-        <h2>par Alice Dupont & Marc Lemaitre</h2>
+        <h2>par Axel Gautier et Omri Dakka</h2>
       </header>
-
-      <section className="intro">
-        <p>Bienvenue sur So Close, votre plateforme pour découvrir et rejoindre les jardins partagés de votre quartier à Paris.</p>
-      </section>
 
       <section className="filter">
         <label htmlFor="district-select">Filtrer par quartier :</label>
