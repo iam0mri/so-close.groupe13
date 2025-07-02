@@ -4,7 +4,6 @@ import './App.css';
 type Garden = {
   id: number;
   name: string;
-  address: string;
   district: string;
 };
 
@@ -72,9 +71,7 @@ const App: React.FC = () => {
           gardens.map((garden) => (
             <div key={garden.id} className="garden-card">
               <h3>{garden.name}</h3>
-              <p><strong>Adresse :</strong> {garden.address}</p>
               <p><strong>Quartier :</strong> {garden.district}</p>
-              <p><strong>Parcelles disponibles :</strong> {garden.availablePlots}</p>
             </div>
           ))
         )}

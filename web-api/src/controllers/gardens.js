@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const router = express.Router();
-const dataPath = path.join(__dirname, '../data/gardens.json');
+const dataPath = path.join(__dirname, '../../../data/gardens.json');
 
 // Get all gardens
 router.get('/', (req, res) => {

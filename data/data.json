@@ -2,29 +2,21 @@
   {
     "id": 1,
     "name": "Le Jardin de Belleville",
-    "address": "Rue Piat, 75020 Paris",
-    "availablePlots": 3,
     "district": "20e"
   },
   {
     "id": 2,
     "name": "Les Petits Potagers",
-    "address": "Rue de Reuilly, 75012 Paris",
-    "availablePlots": 5,
     "district": "12e"
   },
   {
     "id": 3,
     "name": "La Terre Promise",
-    "address": "Boulevard de Ménilmontant, 75011 Paris",
-    "availablePlots": 0,
     "district": "11e"
   },
   {
     "id": 3,
     "name": "Les Racines Solidaires",
-    "address": "Rue de Bagnolet, 75020 Paris",
-    "availablePlots": 2,
     "district": "20e"
   }
 ]
