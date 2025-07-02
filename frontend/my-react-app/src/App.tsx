@@ -5,7 +5,6 @@ type Garden = {
   id: number;
   name: string;
   address: string;
-  availablePlots: number;
   district: string;
 };
 
