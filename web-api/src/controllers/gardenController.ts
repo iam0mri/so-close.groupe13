@@ -2,7 +2,7 @@ mport { Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 
-const dataPath = path.join(__dirname, '../data/data.json');
+const dataPath = path.join(__dirname, '../../../data/data.json');
 
 const getGardens = (req: Request, res: Response) => {
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
