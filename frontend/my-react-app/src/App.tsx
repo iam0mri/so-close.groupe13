@@ -37,6 +37,7 @@ const App: React.FC = () => {
   useEffect(() => {
     console.log(district);
     fetchGardens(district);
+    console.log(gardens);
   }, []);
 
   const handleDistrictChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -45,6 +46,7 @@ const App: React.FC = () => {
     console.log(district);
     setSelectedDistrict(selected);
     fetchGardens(selected);
+    console.log(gardens);
   };
 
   return (
