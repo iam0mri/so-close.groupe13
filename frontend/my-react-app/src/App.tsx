@@ -6,12 +6,14 @@ type Garden = {
   name: string;
   address: string;
   availablePlots: number;
+  district: string;
 };
 
 const mockGardens: Garden[] = [
-  { id: 1, name: 'Le Jardin de Belleville', address: 'Rue Piat, 75020 Paris', availablePlots: 3 },
-  { id: 2, name: 'Les Petits Potagers', address: 'Rue de Reuilly, 75012 Paris', availablePlots: 5 },
-  { id: 3, name: 'La Terre Promise', address: 'Boulevard de Ménilmontant, 75011 Paris', availablePlots: 0 },
+  { id: 1, name: 'Le Jardin de Belleville', address: 'Rue Piat, 75020 Paris', availablePlots: 3 , district: '20e'},
+  { id: 2, name: 'Les Petits Potagers', address: 'Rue de Reuilly, 75012 Paris', availablePlots: 5, district: '12e'},
+  { id: 3, name: 'La Terre Promise', address: 'Boulevard de Ménilmontant, 75011 Paris', availablePlots: 0, district: '11e' },
+  { id: 4, name: 'Les Racines Solidaires', address: 'Rue de Bagnolet, 75020 Paris', availablePlots: 2, district: '20e' },
 ];
 
 const App: React.FC = () => {
