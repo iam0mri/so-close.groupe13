@@ -6,9 +6,9 @@ type Garden = {
   name: string;
   district: string;
 };
-var district = 'Tous';
+var thisdistrict = 'Tous';
 const App: React.FC = () => {
-  const [gardens, setGardens] = useState<Garden[]>([]);
+  var [gardens, setGardens] = useState<Garden[]>([]);
   const [districts, setDistricts] = useState<string[]>([]);
   const [selectedDistrict, setSelectedDistrict] = useState<string>('Tous');
 
@@ -20,9 +20,9 @@ const App: React.FC = () => {
           : 'http://localhost:4000/api/gardens';
       const response = await fetch(url);
       const data = await response.json();
-      setGardens(data);
+      gardens = data;
+      //setGardens(data);
 
-      // Créer une liste unique de quartiers
       if (district === 'Tous') {
         const uniqueDistricts = Array.from(
           new Set<string>(data.map((g: Garden) => g.district))
@@ -35,15 +35,15 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(district);
-    fetchGardens(district);
+    console.log(thisdistrict);
+    fetchGardens(thisdistrict);
     console.log(gardens);
   }, []);
 
   const handleDistrictChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = event.target.value;
-    district = selected;
-    console.log(district);
+    thisdistrict = selected;
+    console.log(thisdistrict);
     setSelectedDistrict(selected);
     fetchGardens(selected);
     console.log(gardens);
