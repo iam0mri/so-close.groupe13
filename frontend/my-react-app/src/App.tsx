@@ -34,6 +34,9 @@ const App: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    fetchGardens(district);
+  }, []);
 
   const handleDistrictChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = event.target.value;
