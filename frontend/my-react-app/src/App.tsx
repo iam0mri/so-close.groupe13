@@ -27,7 +27,7 @@ const App: React.FC = () => {
       // Créer une liste unique de quartiers
       if (district === 'Tous') {
         const uniqueDistricts = Array.from(
-          new Set(data.map((g: Garden) => g.district))
+          new Set<string>(data.map((g: Garden) => g.district))
         );
         setDistricts(uniqueDistricts.sort());
       }
