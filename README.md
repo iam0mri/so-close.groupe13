@@ -8,5 +8,13 @@ nous avons mis en place une action, qui lorsque nous coderons sur notre repo git
 
 la fonctionnalité choisie est: Affichage des jardins potagers disponibles dans un quartier
 les technologies utilisées sont:
-languages : typescript, CSS, HTML
-framework: react 
+languages : typescript, CSS, HTML, javascript (back)
+framework: react
+
+pour build le front :
+aller dans le dossier frontend/my-react-app
+npm start
+
+pour build le back:
+aller dans le dossier web-api
+npm run dev
