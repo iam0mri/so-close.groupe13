@@ -18,3 +18,6 @@ npm start
 pour build le back:
 aller dans le dossier web-api
 npm run dev
+
+le back sera sur localhost:4000
+le front sera sur localhost:5173
