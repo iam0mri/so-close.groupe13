@@ -21,7 +21,7 @@ const App: React.FC = () => {
       const response = await fetch(url);
       const data = await response.json();
       gardens = data;
-      //setGardens(data);
+      setGardens(data);
 
       if (district === 'Tous') {
         const uniqueDistricts = Array.from(
