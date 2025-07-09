@@ -12,3 +12,5 @@ export const checkJwt = expressjwt({
   issuer: "dev-f4ersp6xmlisgq2s.us.auth0.com",
   algorithms: ["RS256"],
 });
+
+module.exports = middleware
