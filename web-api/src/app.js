@@ -11,5 +11,5 @@ app.use(express.json());
 app.use('/api/gardens', gardensRouter);
 
 app.listen(PORT, () => {
-  console.log(`✅ Server is running at http://localhost:${PORT}`);
+  console.log(`Server is running at http://localhost:${PORT}`);
 });

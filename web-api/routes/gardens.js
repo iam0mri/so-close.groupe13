@@ -1,23 +1,24 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { checkJwt } = require('../middleware/auth');
 
 const router = express.Router();
 const dataPath = path.join(__dirname, '../../data/data.json');
 
-router.get('/', (req, res) => {
+router.get('/', checkJwt, (req, res) => {
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
   res.json(data);
 });
 
-router.get('/district/:district', (req, res) => {
+router.get('/district/:district', checkJwt, (req, res) => {
   const { district } = req.params;
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
   const filtered = data.filter(g => g.district === district);
   res.json(filtered);
 });
 
-router.post('/', (req, res) => {
+router.post('/', checkJwt, (req, res) => {
   const { name, district } = req.body;
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
   const newGarden = {
@@ -30,7 +31,7 @@ router.post('/', (req, res) => {
   res.status(201).json(newGarden);
 });
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id', checkJwt, (req, res) => {
   const { id } = req.params;
   const { name, district } = req.body;
   const data = readData();
@@ -47,7 +48,7 @@ router.patch('/:id', (req, res) => {
   res.json(data[index]);
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', checkJwt, (req, res) => {
   const { id } = req.params;
   let data = readData();
   const initialLength = data.length;

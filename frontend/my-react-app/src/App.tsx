@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Auth0Provider } from "@auth0/auth0-react";
 import './App.css';
 
+import { useAuth0 } from "@auth0/auth0-react";
+
+const { loginWithRedirect, logout, user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+
+
 type Garden = {
   id: number;
   name: string;
@@ -13,12 +18,13 @@ const App: React.FC = () => {
   const [selectedDistrict, setSelectedDistrict] = useState<string>('Tous');
 
   const fetchGardens = async (district: string) => {
+    const token = localStorage.getItem("access_token");
     try {
       const url =
         district && district !== 'Tous'
           ? `http://localhost:4000/api/gardens?district=${district}`
           : 'http://localhost:4000/api/gardens';
-      const response = await fetch(url);
+      const response = await fetch(url, {headers: {Authorization: 'Bearer ${token}'}});
       const data = await response.json();
       gardens = data;
       setGardens(data);
@@ -36,6 +42,8 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
+      const token = getAccessTokenSilently();
+      localStorage.setItem("access_token", token);
       fetchGardens('Tous');
     }
   }, [isAuthenticated]);
