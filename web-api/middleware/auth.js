@@ -1,16 +1,18 @@
+const { expressjwt } = require("express-jwt");
+const jwksRsa = require("jwks-rsa");
 
-import { expressjwt } from "express-jwt";
-import jwksRsa from "jwks-rsa";
+const AUTH0_DOMAIN = "dev-f4ersp6xmlisgq2s.us.auth0.com";
+const AUTH0_AUDIENCE = "https://dev-f4ersp6xmlisgq2s.us.auth0.com/api/v2/";
 
-export const checkJwt = expressjwt({
+const checkJwt = expressjwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
-    jwksUri: "dev-f4ersp6xmlisgq2s.us.auth0.com/.well-known/jwks.json",
+    jwksUri: `https://${AUTH0_DOMAIN}/.well-known/jwks.json`,
   }),
-  audience: "https://dev-f4ersp6xmlisgq2s.us.auth0.com/api/v2/", // remplace par la vraie valeur
-  issuer: "dev-f4ersp6xmlisgq2s.us.auth0.com",
+  audience: AUTH0_AUDIENCE,
+  issuer: `https://${AUTH0_DOMAIN}/`,
   algorithms: ["RS256"],
 });
 
-module.exports = middleware
+module.exports = { checkJwt };
