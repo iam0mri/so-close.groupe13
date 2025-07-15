@@ -9,7 +9,7 @@ const router = express.Router();
 
 
 const pool = new Pool({
-  connectionString: 'postgres://user:password@localhost:5433/soclose'
+  connectionString: 'postgres://user:password@localhost:5432/soclose'
 });
 router.get('/', checkJwt, async (req, res) => {
   const { rows } = await pool.query('SELECT * FROM gardens');
