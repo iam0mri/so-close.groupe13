@@ -14,5 +14,5 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: "index.html,frontend/my-react-app/*,README.md,data/*,web-api/*"
+          source: "index.html,frontend/my-react-app/*,README.md,data/*,web-api/*,docker-compose.yml"
           target: /home/sigl/site
