@@ -26,3 +26,8 @@ les routes API rest sont protégées
 je ne suis pas arrivé à faire marcher le front
 
 nous avons choisi la SGBD postgresql car nous utilisons des données qui auront des relations avec d'autre tables si nous implémentons plus de features.
+pour lancer le projet, à la root: 
+docker compose up -d
+
+pour peupler la db, dans le dossier data:
+./import_gardens.sh
