@@ -21,3 +21,6 @@ npm run dev
 
 le back sera sur localhost:4000
 le front sera sur localhost:5173
+
+les routes API rest sont protégées
+je ne suis pas arrivé à faire marcher le front
