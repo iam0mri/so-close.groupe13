@@ -1,64 +1,60 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { Pool } = require('pg');
 const { checkJwt } = require('../middleware/auth');
 
 const router = express.Router();
-const dataPath = path.join(__dirname, '../../data/data.json');
 
-router.get('/', checkJwt, (req, res) => {
-  const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-  res.json(data);
+
+
+const pool = new Pool({
+  connectionString: 'postgres://user:password@localhost:5432/soclose'
 });
-
-router.get('/district/:district', checkJwt, (req, res) => {
+router.get('/', checkJwt, async (req, res) => {
+  const { rows } = await pool.query('SELECT * FROM gardens');
+  res.json(rows);
+});
+router.get('/district/:district', checkJwt, async (req, res) => {
   const { district } = req.params;
-  const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-  const filtered = data.filter(g => g.district === district);
-  res.json(filtered);
+  const { rows } = await pool.query('SELECT * FROM gardens WHERE district = $1', [district]);
+  res.json(rows);
 });
 
-router.post('/', checkJwt, (req, res) => {
+router.post('/', checkJwt, async (req, res) => {
   const { name, district } = req.body;
-  const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-  const newGarden = {
-    id: Date.now(),
-    name,
-    district
-  };
-  data.push(newGarden);
-  fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-  res.status(201).json(newGarden);
+  const { rows } = await pool.query(
+    'INSERT INTO gardens (name, district) VALUES ($1, $2) RETURNING *',
+    [name, district]
+  );
+  res.status(201).json(rows[0]);
 });
 
-router.patch('/:id', checkJwt, (req, res) => {
+router.patch('/:id', checkJwt, async (req, res) => {
   const { id } = req.params;
   const { name, district } = req.body;
-  const data = readData();
-  const index = data.findIndex(g => g.id === parseInt(id));
 
-  if (index === -1) {
+  const existing = await pool.query('SELECT * FROM gardens WHERE id = $1', [id]);
+  if (existing.rowCount === 0) {
     return res.status(404).json({ error: 'Garden not found' });
   }
 
-  if (name !== undefined) data[index].name = name;
-  if (district !== undefined) data[index].district = district;
+  const updated = await pool.query(
+    'UPDATE gardens SET name = COALESCE($1, name), district = COALESCE($2, district) WHERE id = $3 RETURNING *',
+    [name, district, id]
+  );
 
-  writeData(data);
-  res.json(data[index]);
+  res.json(updated.rows[0]);
 });
 
-router.delete('/:id', checkJwt, (req, res) => {
+router.delete('/:id', checkJwt, async (req, res) => {
   const { id } = req.params;
-  let data = readData();
-  const initialLength = data.length;
-  data = data.filter(g => g.id !== parseInt(id));
+  const result = await pool.query('DELETE FROM gardens WHERE id = $1', [id]);
 
-  if (data.length === initialLength) {
+  if (result.rowCount === 0) {
     return res.status(404).json({ error: 'Garden not found' });
   }
 
-  writeData(data);
   res.status(204).send();
 });
 
