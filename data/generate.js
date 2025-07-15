@@ -1,8 +1,8 @@
 const { Client } = require('pg');
-const faker = require('faker');
+const faker = require('@faker-js/faker');
 
 const client = new Client({
-  connectionString: 'postgres://user:password@localhost:5432/soclose'
+  connectionString: 'postgres://soclose_user:soclose_pass@localhost:5432/soclose'
 });
 
 async function insertFakeData() {
@@ -18,4 +18,4 @@ async function insertFakeData() {
   await client.end();
 }
 
-insertFakeData().then(() => console.log('Données insérées !'));
+insertFakeData().then();
