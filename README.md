@@ -24,3 +24,5 @@ le front sera sur localhost:5173
 
 les routes API rest sont protégées
 je ne suis pas arrivé à faire marcher le front
+
+nous avons choisi la SGBD postgresql car nous utilisons des données qui auront des relations avec d'autre tables si nous implémentons plus de features.
